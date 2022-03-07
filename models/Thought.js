@@ -16,9 +16,13 @@ const thoughtSchema = new Schema(
         default: Date.now,
         // get: 
     },
-    username: {
-
-    },
+    username: [
+      {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: 'User',
+      },
+  ],
     reactions: [Reaction],
   },
   {
