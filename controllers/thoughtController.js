@@ -16,31 +16,29 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  getReactions(req, res) {
-    Thought.find()
-      .then((reactions) => res.json(reactions))
-      .catch((err) => res.status(500).json(err));
-  },
-  getSingleReaction(req, res) {
-    Thought.findOne({ _id: req.params.reactionId})
-    .select('-__v')
-    .then((friend) =>
-        !friend
-          ? res.status(404).json({ message: 'No friend with that ID' })
-          : res.json(friend)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
-  // create a new user
+  // create a new thought
   createThought(req, res) {
     Thought.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
   createReaction(req, res) {
-    Thought.create(req.body)
-      .then((dbUserData) => res.json(dbUserData))
-      .catch((err) => res.status(500).json(err));
+    Thought.findOneAndUpdate(
+      { _id:req.params.thoughtId},
+      {$addToSet:{reactions:req.body}},
+      {runValidators:true, new:true}
+    )
+    .then((thought)=>
+      !thought
+          ? res
+              .status(404)
+              .json({message:'No thought found with that id'})
+          : res.json(thought)
+    )
+    .catch((err)=>{
+      console.log(err)
+      res.status(500).json(err);
+    })
   },
   updateThought(req, res) {
     Thought.updateOne(
@@ -60,10 +58,21 @@ module.exports = {
     )
   },
   deleteReaction(req, res) {
-    Thought.deleteOne(
-      {
-        _id: req.params.reactionId
-      }
+    Thought.findOneAndUpdate(
+      { _id:req.params.thoughtId},
+      {$pull: {reactions:{reactionId:req.params.reactionId}}},
+      {runValidators:true, new:true}
     )
+    .then((thought)=>
+      !thought
+          ?res
+              .status(404)
+              .json({message:'No thought found with that id'})
+          :res.json({message:'delete reaction'})   
+    )
+    .catch((err)=>{
+      console.log(err)
+      res.status(500).json(err);
+    })
   },
 };

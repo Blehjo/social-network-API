@@ -14,7 +14,7 @@ const thoughtSchema = new Schema(
     createdAt: {
         type: Date,
         default: Date.now,
-        // get: 
+        get: (createDate) => Intl.DateTimeFormat('en-US').format(createDate)
     },
     username: [
       {
@@ -26,8 +26,6 @@ const thoughtSchema = new Schema(
     reactions: [Reaction],
   },
   {
-    // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
-    // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
     toJSON: {
       virtuals: true,
       getters: true,
@@ -37,7 +35,7 @@ const thoughtSchema = new Schema(
 );
 
 // Create a virtual property `fullName` that gets and sets the user's full name
-userSchema
+thoughtSchema
   .virtual('reactionCount')
   // Getter
   .get(function () {
