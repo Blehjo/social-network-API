@@ -6,6 +6,18 @@
   
   
   This is a backend application.  It has routes, models, and controllers for the different paths to have a proper functioning social media site.  This application is useful if you want a site with users, their thoughts, and reactions to the thoughts.
+  
+  <img width="739" alt="user-get-route" src="https://user-images.githubusercontent.com/89440573/157163685-bf93ae18-1732-4614-886c-28467534b39a.png">
+User get route
+
+<img width="737" alt="user-post-route" src="https://user-images.githubusercontent.com/89440573/157163704-dee65d89-5874-486a-bb62-c8bcb7ca091d.png">
+User post route
+
+<img width="737" alt="user-delete-route" src="https://user-images.githubusercontent.com/89440573/157163722-629a96f6-7642-4dbe-a506-ff7d238dec38.png">
+User delete route
+
+[Demonstration of all possible routes](https://watch.screencastify.com/v/6bgYf7rMuVY5xQvQ8WNf)
+  
   ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
