@@ -53,15 +53,15 @@ module.exports = {
         new: true,
       }
     )
-      .then((user)=>
-        !user
-            ? res.status(404).json({message:'No user with this id!'})
-            : res.json(user)
-      )
-      .catch((err)=> {
-        console.log(err)
-        res.status(500).json(err)
-      })
+    .then((user)=>
+      !user
+          ? res.status(404).json({message:'No user with this id!'})
+          : res.json(user)
+    )
+    .catch((err)=> {
+      console.log(err)
+      res.status(500).json(err)
+    })
   },
   deleteUser(req, res) {
     User.deleteOne(
@@ -73,11 +73,11 @@ module.exports = {
         !user
             ? res.status(404).json({message:'No user with this id!'})
             : res.json(user)
-      )
-      .catch((err)=> {
+    )
+    .catch((err)=> {
         console.log(err)
         res.status(500).json(err)
-      })
+    })
   },
   deleteFriend(req, res) {
     User.findOneAndUpdate(
@@ -94,13 +94,13 @@ module.exports = {
       },
     )
     .then((friend)=>
-        !friend
-            ? res.status(404).json({message:'No friend with this id!'})
-            : res.json(friend)
-      )
-      .catch((err)=> {
-        console.log(err)
-        res.status(500).json(err)
-      })
+      !friend
+          ? res.status(404).json({message:'No friend with this id!'})
+          : res.json(friend)
+    )
+    .catch((err)=> {
+      console.log(err)
+      res.status(500).json(err)
+    })
   },
 };
