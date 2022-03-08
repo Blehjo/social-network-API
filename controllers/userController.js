@@ -86,9 +86,12 @@ module.exports = {
       },
       {
         $pull: {
-          _id: req.params.friendId
+          friends: req.params.friendId
         }
-      }
+      },
+      { 
+        new: true, 
+      },
     )
     .then((friend)=>
         !friend
